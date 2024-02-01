@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="content-type" content="text/html"; charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <script>
+        function init() {
+            var id = localStorage.getItem('id'); // ローカルストレージから値を取り出す
+            if (id == null) {
+                location.href = './login'; // IDが未登録の場合、ログインページへ移動
+            }
+            document.querySelector('#id').textContent = 'ID:' + id;
+            document.querySelector('#id_input').value = id;
+        }
+    </script>
+</head>
+<body class="container" onload="init();">
+    <header>
+        <h1 class="display-4"><%= title %></h1>
+    </header>
+    <div role="main">
+        <p>※メッセージは最大10個まで保管されます。</p>
+        <form action="/" method=POST>
+            <p id="id"></p>
+            <input type="hidden" id="id_input" name="id">
+            <div class="form-group">
+                <label for="msg">Message</label>
+                <input type="text" name="msg" id="msg" class="form-control">
+            </div>
+            <input type="submit" value="送信" class="btn btn-primary">
+        </form>
+        <table class="table">
+            <% for (var i in data) { %> 
+            <%- include('data_item', {val:data[i]}) %> <!-- data配列に格納されたデータを取り出す -->
+            <% } %> 
+        </table>
+    </div>
+</body>
+</html>

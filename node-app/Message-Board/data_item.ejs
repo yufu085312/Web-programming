@@ -1,0 +1,8 @@
+<!-- index.ejsのfor文によって取り出された値を取得して表示 -->
+<% if (val != '') { %> 
+<% var obj= JSON.parse(val); %>     
+<tr>
+    <th><%= obj.id %></th>
+    <td><%= obj.msg %></td>
+</tr>
+<% } %> 
